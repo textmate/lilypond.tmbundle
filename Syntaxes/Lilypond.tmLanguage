@@ -1069,32 +1069,35 @@
 		<key>scheme</key>
 		<dict>
 			<key>begin</key>
-			<string>#</string>
+			<string>(^[ \t])?(?=#)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.embedded.scheme.lilypond</string>
+					<string>punctuation.whitespace.embedded.leading.scheme</string>
 				</dict>
 			</dict>
-			<key>comment</key>
-			<string>
-				Lilypond source can embed scheme code to do things more
-				flexibly than allowed by the basic language.
-
-				We need to make sure to match after a \n, as included
-				by some s-expressions in the scheme grammar.
-			</string>
-			<key>contentName</key>
-			<string>source.scheme.embedded.lilypond</string>
 			<key>end</key>
-			<string>(?=[\s%])|(?&lt;=\n)</string>
+			<string>(?!\G)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>include</key>
+					<key>begin</key>
+					<string>#</string>
+					<key>contentName</key>
 					<string>source.scheme</string>
+					<key>end</key>
+					<string>(?=[\s%])|(?&lt;=\n)</string>
+					<key>name</key>
+					<string>meta.embedded.line.scheme</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>source.scheme</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 		</dict>
