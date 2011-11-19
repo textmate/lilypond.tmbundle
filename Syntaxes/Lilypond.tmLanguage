@@ -16,10 +16,6 @@
 		<string>lily</string>
 		<string>ily</string>
 	</array>
-	<key>foldingStartMarker</key>
-	<string>(\{|&lt;&lt;)\s*$</string>
-	<key>foldingStopMarker</key>
-	<string>(\}|&gt;&gt;)</string>
 	<key>keyEquivalent</key>
 	<string>^~L</string>
 	<key>name</key>
