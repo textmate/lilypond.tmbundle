@@ -14,7 +14,7 @@ html_header 'Engrave &amp;amp; View' "$TM_FILENAME"
 echo '&lt;h2&gt;Engraving…&lt;/h2&gt;'
 
 cd "$TM_DIRECTORY"
-"${TM_LILYPOND:=lilypond}" "$TM_FILENAME" | pre
+"${TM_LILYPOND:=lilypond}" "$TM_FILENAME" 2&gt;&amp;1 | pre
 
 if [[ -f "${TM_FILEPATH%.*}.pdf" ]];
    then echo "Opening PDF…"; open "${TM_FILEPATH%.*}.pdf"
