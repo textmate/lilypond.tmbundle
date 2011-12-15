@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>beforeRunningCommand</key>
@@ -7,20 +7,14 @@
 	<key>command</key>
 	<string>#!/bin/bash
 
+[[ -f "${TM_SUPPORT_PATH}/lib/bash_init.sh" ]] &amp;&amp; . "${TM_SUPPORT_PATH}/lib/bash_init.sh"
+
 . "${TM_SUPPORT_PATH}/lib/webpreview.sh"
 html_header 'Engrave &amp;amp; View' "$TM_FILENAME"
 echo '&lt;h2&gt;Engraving…&lt;/h2&gt;'
 
-: ${TM_LILYPOND:="$(find_app Lilypond.app)/Contents/Resources/bin/lilypond"}
-[[ ! -f "$TM_LILYPOND" ]] &amp;&amp; TM_LILYPOND=lilypond
-
-if ! type &gt;/dev/null -p "$TM_LILYPOND"; then
-   echo "Error locating &lt;a href='http://lilypond.org/web/'&gt;lilypond&lt;/a&gt; on your system."
-   exit
-fi
-
 cd "$TM_DIRECTORY"
-"$TM_LILYPOND" "$TM_FILENAME" | pre
+"${TM_LILYPOND:=lilypond}" "$TM_FILENAME" | pre
 
 if [[ -f "${TM_FILEPATH%.*}.pdf" ]];
    then echo "Opening PDF…"; open "${TM_FILEPATH%.*}.pdf"
@@ -28,15 +22,38 @@ if [[ -f "${TM_FILEPATH%.*}.pdf" ]];
 fi</string>
 	<key>input</key>
 	<string>none</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>@r</string>
 	<key>name</key>
 	<string>Engrave and View</string>
-	<key>output</key>
-	<string>showAsHTML</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
+	<key>requiredCommands</key>
+	<array>
+		<dict>
+			<key>command</key>
+			<string>lilypond</string>
+			<key>locations</key>
+			<array>
+				<string>/Applications/LilyPond.app/Contents/Resources/bin/lilypond</string>
+				<string>/opt/local/bin/lilypond</string>
+				<string>/usr/local/bin/lilypond</string>
+			</array>
+			<key>variable</key>
+			<string>TM_LILYPOND</string>
+		</dict>
+	</array>
 	<key>scope</key>
 	<string>source.lilypond</string>
 	<key>uuid</key>
 	<string>E8B6A543-90A6-46A4-A307-B21B67EF7F2F</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>
