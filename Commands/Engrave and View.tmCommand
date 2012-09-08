@@ -51,6 +51,8 @@ fi</string>
 	</array>
 	<key>scope</key>
 	<string>source.lilypond</string>
+	<key>semanticClass</key>
+	<string>process.build-and-run.lilypond</string>
 	<key>uuid</key>
 	<string>E8B6A543-90A6-46A4-A307-B21B67EF7F2F</string>
 	<key>version</key>
